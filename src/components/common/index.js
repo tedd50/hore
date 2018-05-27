@@ -1,4 +1,6 @@
 export * from './Button';
+export * from './ButtonFooter';
+export * from './ButtonLogout';
 export * from './ButtonCart';
 export * from './ButtonCartZero';
 export * from './ButtonCartLeft';
@@ -9,3 +11,4 @@ export * from './Header';
 export * from './Input';
 export * from './Spinner';
 export * from './Confirm';
+export * from './Bg';

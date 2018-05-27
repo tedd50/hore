@@ -79,19 +79,19 @@ export const loginUser = ({ username, password }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username,
-        password
-        // username: 'user1',
-        // password: 'user1'
+        // username,
+        // password
+        username: 'user1',
+        password: 'user1'
       }),
     })
     .then((response) => response.json())
     .then(responseJson => {
-      // console.log('loginUser', responseJson, username, password);
+      console.log('loginUser', responseJson, username, password);
       // console.log(responseJson.errorcode);
       // console.log(responseJson.message);
       // console.log(responseJson.data[0]);
-      if (responseJson.errorcode === '0') {
+      if (responseJson.errorcode === '0' && responseJson.data[0].level === '0') {
         // global.auth = base64.encode(`${username}:${password}`);
         global.auth = base64.encode('user1:user1');
         // console.log(global.auth);
@@ -174,6 +174,7 @@ const loginUserSuccess = (dispatch, user) => {
     payload: user
   });
 
+  // Actions.main();
   Actions.main();
 };
 

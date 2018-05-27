@@ -17,6 +17,8 @@ export const PASSWORD_SAVE = 'password_save';
 
 export const CATEGORY_FETCH_SUCCESS = 'category_fetch_success';
 
+export const KEYWORD_CHANGED = 'keyword_changed';
+
 export const PRODUCT_FETCH_SUCCESS = 'product_fetch_success';
 export const PRODUCT_ADD = 'product_add';
 

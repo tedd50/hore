@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { newpassChanged, newpass2Changed, passwordSave } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
@@ -33,33 +33,35 @@ class ChangePassword extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="New Password"
-            onChangeText={this.onNewPassChange.bind(this)}
-            value={this.props.newpass}
-          />
-        </CardSection>
+      <View style={{ flex: 1, backgroundColor: 'white' }}>
+        <Card>
+          <CardSection>
+            <Input
+              secureTextEntry
+              label="New Password"
+              onChangeText={this.onNewPassChange.bind(this)}
+              value={this.props.newpass}
+            />
+          </CardSection>
 
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Confirm Password"
-            onChangeText={this.onNewPass2Change.bind(this)}
-            value={this.props.newpass2}
-          />
-        </CardSection>
+          <CardSection>
+            <Input
+              secureTextEntry
+              label="Confirm Password"
+              onChangeText={this.onNewPass2Change.bind(this)}
+              value={this.props.newpass2}
+            />
+          </CardSection>
 
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
 
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+          <CardSection>
+            {this.renderButton()}
+          </CardSection>
+        </Card>
+      </View>
     );
   }
 }

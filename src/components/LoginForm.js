@@ -1,5 +1,6 @@
+/* eslint-disable global-require */
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import { usernameChanged, passwordChanged, loginUser } from '../actions';
 import { Card, CardSection, Input, Button, Spinner } from './common';
@@ -33,34 +34,37 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Card>
-        <CardSection>
-          <Input
-            label="Username"
-            placeholder="user1"
-            onChangeText={this.onUserNameChange.bind(this)}
-            value={this.props.username}
-          />
-        </CardSection>
-
-        <CardSection>
-          <Input
-            secureTextEntry
-            label="Password"
-            placeholder="password"
-            onChangeText={this.onPasswordChange.bind(this)}
-            value={this.props.password}
-          />
-        </CardSection>
-
-        <Text style={styles.errorTextStyle}>
-          {this.props.error}
-        </Text>
-
-        <CardSection>
-          {this.renderButton()}
-        </CardSection>
-      </Card>
+      <View style={styles.containerStyle}>
+        <Image
+          style={{ height: 265, width: 256, alignSelf: 'center' }}
+          source={require('../image/logo.png')}
+        />
+        <Card>
+          <CardSection>
+            <Input
+              label="Username"
+              placeholder="user1"
+              onChangeText={this.onUserNameChange.bind(this)}
+              value={this.props.username}
+            />
+          </CardSection>
+          <CardSection>
+            <Input
+              secureTextEntry
+              label="Password"
+              placeholder="password"
+              onChangeText={this.onPasswordChange.bind(this)}
+              value={this.props.password}
+            />
+          </CardSection>
+          <Text style={styles.errorTextStyle}>
+            {this.props.error}
+          </Text>
+          <CardSection>
+            {this.renderButton()}
+          </CardSection>
+        </Card>
+      </View>
     );
   }
 }
@@ -69,8 +73,13 @@ const styles = {
   errorTextStyle: {
     fontSize: 20,
     alignSelf: 'center',
-    color: 'red'
-  }
+    color: 'red',
+  },
+  containerStyle: {
+    flex: 1,
+    backgroundColor: 'white',
+    justifyContent: 'center'
+  },
 };
 
 const mapStateToProps = ({ auth }) => {

@@ -3,14 +3,16 @@ import {
   PRODUCT_ADD,
   ORDER_ADD,
   ORDER_ADD_SUCCESS,
-  ORDER_ADD_FAIL
+  ORDER_ADD_FAIL,
+  KEYWORD_CHANGED
 } from '../actions/types';
 
 const INITIAL_STATE = {
   data: null,
   cart: [],
   error: '',
-  loading: false
+  loading: false,
+  keyword: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,6 +35,8 @@ export default (state = INITIAL_STATE, action) => {
         error: 'Order Placement Failed.',
         loading: false
       };
+    case KEYWORD_CHANGED:
+      return { ...state, keyword: action.payload };
     default:
       return state;
   }

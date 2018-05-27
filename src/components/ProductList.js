@@ -7,9 +7,9 @@ import { productFetch, productAdd } from '../actions';
 class ProductList extends Component {
   componentWillMount() {
     // console.log('ProductList Props', this.props);
-    const { category2id } = this.props;
+    const { category2id, keyword } = this.props;
 
-    this.props.productFetch({ categoryid: category2id });
+    this.props.productFetch({ categoryid: category2id, keyword });
   }
 
   componentWillReceiveProps(nextProps) {

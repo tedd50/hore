@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FlatList, View, Text, Image } from 'react-native';
 import { productAdd, orderAdd } from '../actions';
-import { Card, CardSection, Button, ButtonCartLeft, ButtonCartRight, Spinner } from './common';
+import { ButtonFooter, ButtonCartLeft, ButtonCartRight, Spinner } from './common';
 
 class Cart extends Component {
   onButtonPress(barangid, amount) {
@@ -21,9 +21,9 @@ class Cart extends Component {
     }
 
     return (
-      <Button onPress={this.onOrderPress.bind(this)}>
+      <ButtonFooter onPress={this.onOrderPress.bind(this)}>
         ORDER
-      </Button>
+      </ButtonFooter>
     );
   }
 
@@ -44,53 +44,58 @@ class Cart extends Component {
       );
     }
     return (
-        <FlatList
-          data={cart}
-          extraData={this.props}
-          keyExtractor={item => item.barangid}
-          renderItem={({ item }) => (
-            <View style={styles.listRowStyle}>
-              <View style={styles.picStyle}>
-                <Image style={styles.imageStyle} source={{ uri: item.picture }} />
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 0.9 }}>
+          <FlatList
+            data={cart}
+            extraData={this.props}
+            keyExtractor={item => item.barangid}
+            renderItem={({ item }) => (
+              <View style={styles.listRowStyle}>
+                <View style={styles.picStyle}>
+                  <Image style={styles.imageStyle} source={{ uri: item.picture }} />
+                </View>
+                <View style={styles.descStyle}>
+                  <Text style={styles.itemNameStyle}>{item.name}</Text>
+                  <Text style={styles.pricePerItemStyle}>Rp{item.harga} / item</Text>
+                  <Text style={styles.priceItemStyle}>Rp{item.harga * item.amount}</Text>
+                </View>
+                <View style={styles.qtyStyle}>
+                  <ButtonCartLeft onPress={this.onButtonPress.bind(this, item.barangid, -1)}>
+                    -
+                  </ButtonCartLeft>
+                  <Text style={styles.qtyTextStyle}>{item.amount}</Text>
+                  <ButtonCartRight onPress={this.onButtonPress.bind(this, item.barangid, 1)}>
+                    +
+                  </ButtonCartRight>
+                </View>
               </View>
-              <View style={styles.descStyle}>
-                <Text style={styles.itemNameStyle}>{item.name}</Text>
-                <Text style={styles.pricePerItemStyle}>Rp{item.harga} / item</Text>
-                <Text style={styles.priceItemStyle}>Rp{item.harga * item.amount}</Text>
+            )}
+            ListFooterComponent={
+              <View>
+                <View style={styles.subtotalCardStyle}>
+                  <Text style={styles.subtotalTextStyle}>Subtotal</Text>
+                  <Text style={styles.subtotalTextStyle}>Rp{totalPrice}</Text>
+                </View>
+                <Text style={styles.errorTextStyle}>
+                  {this.props.error}
+                </Text>
               </View>
-              <View style={styles.qtyStyle}>
-                <ButtonCartLeft onPress={this.onButtonPress.bind(this, item.barangid, -1)}>
-                  -
-                </ButtonCartLeft>
-                <Text style={styles.qtyTextStyle}>{item.amount}</Text>
-                <ButtonCartRight onPress={this.onButtonPress.bind(this, item.barangid, 1)}>
-                  +
-                </ButtonCartRight>
-              </View>
-            </View>
-          )}
-          ListFooterComponent={
-            <View>
-              <View style={styles.subtotalCardStyle}>
-                <Text style={styles.subtotalTextStyle}>Subtotal</Text>
-                <Text style={styles.subtotalTextStyle}>Rp{totalPrice}</Text>
-              </View>
-              <Text style={styles.errorTextStyle}>
-                {this.props.error}
-              </Text>
-              <Card>
-                <CardSection>
-                  {this.renderButton()}
-                </CardSection>
-              </Card>
-            </View>
-          }
-        />
+            }
+          />
+        </View>
+        <View style={styles.fixedFooterStyle}>
+          {this.renderButton()}
+        </View>
+      </View>
     );
   }
 }
 
 const styles = {
+  fixedFooterStyle: {
+    flex: 0.1,
+  },
   listRowStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',

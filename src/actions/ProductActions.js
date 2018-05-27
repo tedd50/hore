@@ -6,10 +6,11 @@ import {
   PRODUCT_ADD,
   ORDER_ADD,
   ORDER_ADD_SUCCESS,
-  ORDER_ADD_FAIL
+  ORDER_ADD_FAIL,
+  KEYWORD_CHANGED
 } from './types';
 
-export const productFetch = ({ categoryid }) => {
+export const productFetch = ({ categoryid, keyword }) => {
   return (dispatch) => {
     fetch('http://teddychung.com/horeca/api/index.php?module=barang&action=search', {
       method: 'POST',
@@ -21,7 +22,7 @@ export const productFetch = ({ categoryid }) => {
       body: JSON.stringify({
         page: 1,
         itemperpage: 100,
-        search: '',
+        search: keyword,
         categoryid
       }),
     })
@@ -113,4 +114,11 @@ const orderAddSuccess = (dispatch) => {
   dispatch({ type: ORDER_ADD_SUCCESS });
 
   Actions.main();
+};
+
+export const keywordChanged = (text) => {
+  return {
+    type: KEYWORD_CHANGED,
+    payload: text
+  };
 };
