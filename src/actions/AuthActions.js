@@ -79,10 +79,10 @@ export const loginUser = ({ username, password }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        // username,
-        // password
-        username: 'user1',
-        password: 'user1'
+        username,
+        password
+        // username: 'user1',
+        // password: 'user1'
       }),
     })
     .then((response) => response.json())

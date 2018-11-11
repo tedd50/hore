@@ -72,7 +72,7 @@ class ProductList extends Component {
                 source={{ uri: item.picture }}
               />
               <Text style={styles.priceStyle}>
-                Rp{item.harga}
+                Rp{item.harga.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')}
               </Text>
               <Text style={styles.nameStyle}>
                 {item.barangname}

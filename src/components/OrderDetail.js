@@ -62,8 +62,12 @@ class OrderDetail extends Component {
             </View>
             <View style={styles.descStyle}>
               <Text style={styles.itemNameStyle}>{item.barangname}</Text>
-              <Text style={styles.pricePerItemStyle}>Rp{item.price} / item</Text>
-              <Text style={styles.priceItemStyle}>Rp{item.price * item.amount}</Text>
+              <Text style={styles.pricePerItemStyle}>
+                Rp{item.price.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')} / item
+              </Text>
+              <Text style={styles.priceItemStyle}>
+                Rp{(item.price * item.amount).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')}
+              </Text>
             </View>
             <View style={styles.qtyStyle}>
               <Text style={styles.qtyTextStyle}>{item.amount}</Text>
@@ -73,7 +77,9 @@ class OrderDetail extends Component {
         ListFooterComponent={
           <View style={styles.subtotalCardStyle}>
             <Text style={styles.subtotalTextStyle}>Subtotal</Text>
-            <Text style={styles.subtotalTextStyle}>Rp{totalPrice}</Text>
+            <Text style={styles.subtotalTextStyle}>
+              Rp{totalPrice.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')}
+            </Text>
           </View>
         }
       />

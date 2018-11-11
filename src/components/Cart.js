@@ -57,8 +57,12 @@ class Cart extends Component {
                 </View>
                 <View style={styles.descStyle}>
                   <Text style={styles.itemNameStyle}>{item.name}</Text>
-                  <Text style={styles.pricePerItemStyle}>Rp{item.harga} / item</Text>
-                  <Text style={styles.priceItemStyle}>Rp{item.harga * item.amount}</Text>
+                  <Text style={styles.pricePerItemStyle}>
+                    Rp{item.harga.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')} / item
+                  </Text>
+                  <Text style={styles.priceItemStyle}>
+                    Rp{(item.harga * item.amount).toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')}
+                  </Text>
                 </View>
                 <View style={styles.qtyStyle}>
                   <ButtonCartLeft onPress={this.onButtonPress.bind(this, item.barangid, -1)}>
@@ -75,7 +79,9 @@ class Cart extends Component {
               <View>
                 <View style={styles.subtotalCardStyle}>
                   <Text style={styles.subtotalTextStyle}>Subtotal</Text>
-                  <Text style={styles.subtotalTextStyle}>Rp{totalPrice}</Text>
+                  <Text style={styles.subtotalTextStyle}>
+                    Rp{totalPrice.toFixed().replace(/(\d)(?=(\d{3})+(,|$))/g, '$1,')}
+                  </Text>
                 </View>
                 <Text style={styles.errorTextStyle}>
                   {this.props.error}
